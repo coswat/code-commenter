@@ -109,6 +109,7 @@ class CodeCommenter {
 
   async action() {
     const { editor, activeFile } = editorManager;
+    // extension name
     let extname = this.getExt(activeFile.name);
 
     if (this.extNotSupported(extname)) {
@@ -118,8 +119,12 @@ class CodeCommenter {
     }
 
     let selectionRange = editor.getSelectionRange();
+    // selected text by user
     let selectedText = editor.getSelectedText();
+    // get the syntax for the file extension
     let cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
+   
+    //if the extension is html or css we do multi line comment instead of single line
     if (extname == "html" || extname == "css") {
       if (selectedText.startsWith(cmt["first"], 0)) {
         let modifiedText = selectedText.replace(cmt["first"], "");
