@@ -1,0 +1,15 @@
+{
+  "id": "coswat.code.commenter",
+  "name": "Code Commenter",
+  "main": "dist/main.js",
+  "version": "1.0.0",
+  "readme": "readme.md",
+  "icon": "icon.png",
+  "files": [],
+  "minVersionCode": 292,
+  "author": {
+    "name": "coderswat",
+    "email": "abhishek.b4696@gmail.com",
+    "github": "coswat"
+  }
+}
