@@ -1,6 +1,5 @@
-<center><img src="https://github.com/phpdune/framework/assets/97345827/40122d70-4091-4a73-a0b3-6dd2b8e09998" alt="Code Commenter Logo" width="128" height="128"> <br><br>
 
-<h1>Code Commenter</h1></center>
+<h1>Code Commenter</h1>
 
 
 Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines and files
