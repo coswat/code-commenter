@@ -10,6 +10,7 @@ const supportedExt = [
   "cs", // C#
   "css", // Css
   "dart", // Dart
+  "ejs", // Embeded Javascript
   "env",
   "gitignore",
   "go", // Golang
@@ -26,6 +27,7 @@ const supportedExt = [
   "lua", // Lua
   "mako", // Mako
   "Makefile", // Makefile
+  "mjs", // Javascript
   "mst", // Mustache
   "mustache", // Mustache
   "php", // PHP
@@ -56,6 +58,7 @@ const cmtSyntax = {
   cpp: "// ",
   cs: "// ",
   dart: "// ",
+  ejs: "// ",
   env: "# ",
   gitignore: "# ",
   go: "// ",
@@ -68,6 +71,7 @@ const cmtSyntax = {
   kt: "// ",
   lua: "-- ",
   Makefile: "# ",
+  mjs: "// ",
   php: "// ",
   pl: "# ",
   pug: "// ",
