@@ -13,7 +13,7 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
             <li>Added support for <code>.ejs</code> and <code>.mjs</code></li>
             <li>Updated readme</li>
         </ul>
-    </details><br>
+    </details>
 
 ## installation 
 
