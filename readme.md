@@ -5,6 +5,16 @@
 
 Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines and files
 
+<details>
+        <summary>
+            <code><strong>v1.0.1</strong></code>
+        </summary>
+        <ul>
+            <li>Added support for <code>.ejs</code> and <code>.mjs</code></li>
+            <li>Updated readme</li>
+        </ul>
+    </details><br>
+
 ## installation 
 
 - Install **Code Commenter** Plugin from `Acode App > Settings > Plugins > And search here for Code Commenter` and install it
