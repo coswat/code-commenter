@@ -3,7 +3,7 @@
   "name": "Code Commenter",
   "main": "dist/main.js",
   "version": "1.0.0",
-  "readme": "readme.md",
+  "readme": "plugin.md",
   "icon": "icon.png",
   "files": [],
   "minVersionCode": 292,

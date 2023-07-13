@@ -1,15 +1,10 @@
-<center><img src="https://github.com/phpdune/framework/assets/97345827/40122d70-4091-4a73-a0b3-6dd2b8e09998" alt="Code Commenter Logo" width="128" height="128"> <br><br>
-
-<h1>Code Commenter</h1></center>
-
+# Code Commenter
 
 Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines and files
 
 ## installation 
 
 - Install **Code Commenter** Plugin from `Acode App > Settings > Plugins > And search here for Code Commenter` and install it
-
-[Acode App](https://play.google.com/store/apps/details?id=com.foxdebug.acodefree)
 
 ## Example Usage
 
@@ -64,6 +59,11 @@ Select the code you want to comment/uncomment then click the comment button to m
 - Xml
 - Yaml
 
-## Contributing
+### Open source:
+Want to see the code? click [here](https://github.com/coswat/acode-code-commenter) 
+and don't forget the little star!
 
-Thank you for considering contributing to the Code Commenter plugin!
+### Report Bugs:
+Found bugs? know how to fix report [here!](https://github.com/coswat/acode-code-commenter/issues)
+
+> 👾 Thanks for using our plugin!
