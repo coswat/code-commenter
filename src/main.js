@@ -138,7 +138,7 @@ class CodeCommenter {
     // Add the comment action to the selection menu
     selectionMenu.add(this.action.bind(this), "//", "all");
   }
-
+  // Plugin Action
   async action() {
     const { editor, activeFile } = editorManager;
     this.loadExtensions();
@@ -231,6 +231,7 @@ class CodeCommenter {
     }
     return cmt + line;
   }
+  // get settings list
   get settingsList() {
     return {
       list: [
@@ -259,6 +260,7 @@ class CodeCommenter {
       },
     };
   }
+  // get plugin settings value from settings.json
   get settings() {
     return appSettings.value[plugin.id];
   }
