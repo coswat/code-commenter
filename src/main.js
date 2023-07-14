@@ -1,9 +1,9 @@
 import plugin from "../plugin.json";
 const selectionMenu = acode.require("selectionMenu");
+const appSettings = acode.require("settings");
 
-// Supported file extensions
-const supportedExt = [
-  "blade", // Laravel Blade (blade.php)
+// Supported languages
+const supportedLang = [
   "c", // C
   "cljs", // Clojure
   "cpp", // C++
@@ -11,11 +11,8 @@ const supportedExt = [
   "css", // Css
   "dart", // Dart
   "ejs", // Embeded Javascript
-  "env",
-  "gitignore",
   "go", // Golang
   "haml", // Haml
-  "hbs", // HandleBars
   "html", // Html
   "hs", // Haskel
   "java", // Java
@@ -23,16 +20,10 @@ const supportedExt = [
   "json", // Json
   "jsx", // Jsx
   "kt", // Kotlin
-  "liquid", // Liquid
   "lua", // Lua
-  "mako", // Mako
-  "Makefile", // Makefile
   "mjs", // Javascript
-  "mst", // Mustache
-  "mustache", // Mustache
   "php", // PHP
   "pl", // Perl
-  "pug", // Pug
   "py", // Python
   "rb", // Ruby
   "rs", // Rust
@@ -40,17 +31,34 @@ const supportedExt = [
   "swift", // Swift
   "sql", // SQL
   "sqlite", // SQLite
-  "toml", // Toml
-  "tpl", // Smarty
   "ts", // Typescript
   "tsx", // Tsx
+];
+
+// Supported templating engines
+const supportedTempl = [
+  "blade", // Laravel Blade (blade.php)
+  "hbs", // HandleBars
+  "liquid", // Liquid
+  "mako", // Mako
+  "mst", // Mustache
+  "mustache", // Mustache
+  "pug", // Pug
+  "tpl", // Smarty
   "twig", // Twig
   "vm", // Velocity
+];
+
+// Supported Files
+const supportedFiles = [
+  "env",
+  "gitignore",
+  "Makefile", // Makefile
+  "toml", // Toml
   "xml", // Xml
   "yml", // Yaml
   "yaml", // Yaml
 ];
-
 // Comment syntax for single-line comments
 const cmtSyntax = {
   c: "// ",
@@ -106,6 +114,26 @@ const cmtSyntaxDouble = {
 };
 
 class CodeCommenter {
+  // multi comment for html ,css, xml is true ( enabled by default )
+  multiComment = true;
+  // file mode for files like .env and .gitignore ( enabled by default )
+  files = true;
+  // templating engine mode (enabled by default)
+  templatingEngine = true;
+  // Available extensions
+  extensions = [];
+
+  // register the settings
+  constructor() {
+    if (!appSettings.value[plugin.id]) {
+      appSettings.value[plugin.id] = {
+        multiComment: this.multiComment,
+        fileMode: this.files,
+        templEngineMode: this.templatingEngine,
+      };
+      appSettings.update(false);
+    }
+  }
   async init() {
     // Add the comment action to the selection menu
     selectionMenu.add(this.action.bind(this), "//", "all");
@@ -113,6 +141,7 @@ class CodeCommenter {
 
   async action() {
     const { editor, activeFile } = editorManager;
+    this.loadExtensions();
     // extension name
     let extname = this.getExt(activeFile.name);
 
@@ -127,14 +156,16 @@ class CodeCommenter {
     let selectedText = editor.getSelectedText();
     // get the syntax for the file extension
     let cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
-   
+
     //if the extension is html or css we do multi line comment instead of single line
-    if (extname == "html" || extname == "css") {
+    if (this.settings.multiComment && this.multiSupport(extname)) {
       if (selectedText.startsWith(cmt["first"], 0)) {
         let modifiedText = selectedText.replace(cmt["first"], "");
-         modifiedText = modifiedText.replace(cmt["last"], "");
+        modifiedText = modifiedText.replace(cmt["last"], "");
         // Replace the selected text with the commented text
         editor.getSession().replace(selectionRange, modifiedText);
+        // Reset extension
+        this.extensions = [];
         // Show a success toast message
         window.toast("Success", 2000);
         return;
@@ -142,6 +173,8 @@ class CodeCommenter {
       let modifiedText = cmt["first"] + selectedText + cmt["last"];
       // Replace the selected text with the commented text
       editor.getSession().replace(selectionRange, modifiedText);
+      // Reset extension
+      this.extensions = [];
       // Show a success toast message
       window.toast("Success", 2000);
       return;
@@ -158,7 +191,8 @@ class CodeCommenter {
 
     // Replace the selected text with the commented text
     editor.getSession().replace(selectionRange, newText);
-
+    // Reset the extensions
+    this.extensions = [];
     // Show a success toast message
     window.toast("Success", 2000);
   }
@@ -178,7 +212,7 @@ class CodeCommenter {
 
   // Check if the file extension is not supported
   extNotSupported(ext) {
-    return !supportedExt.includes(ext);
+    return !this.extensions.includes(ext);
   }
 
   // Parse double-line comments
@@ -197,9 +231,57 @@ class CodeCommenter {
     }
     return cmt + line;
   }
+  get settingsList() {
+    return {
+      list: [
+        {
+          key: "multiComment",
+          text: "Multi Comment for Html | Css | Xml",
+          checkbox: this.settings.multiComment,
+          info: "If you enabled this, then the comment of Html / Css / Xml will be multi commented else single commented",
+        },
+        {
+          key: "fileMode",
+          text: "Comment support for files",
+          checkbox: this.settings.fileMode,
+          info: "Enable comment support for files, ex: files like .env,.gitignore etc",
+        },
+        {
+          key: "templEngineMode",
+          text: "Comment support for templating engines",
+          info: "Enable comment support for templating engine's like blade , pug etc..",
+          checkbox: this.settings.templEngineMode,
+        },
+      ],
+      cb: (key, value) => {
+        this.settings[key] = value;
+        appSettings.update(true);
+      },
+    };
+  }
+  get settings() {
+    return appSettings.value[plugin.id];
+  }
 
   async destroy() {
     // Clean up or perform any necessary actions when the plugin is destroyed
+  }
+  // load supported extesions from users settings
+  loadExtensions() {
+    this.extensions.push(...supportedLang);
+    if (this.settings.fileMode) {
+      this.extensions.push(...supportedFiles);
+    }
+    if (this.settings.templEngineMode) {
+      this.extensions.push(...supportedTempl);
+    }
+  }
+  // check the extension is either html/css or xml
+  multiSupport(ext) {
+    if (ext == "html" || ext == "css" || ext == "xml") {
+      return true;
+    }
+    return false;
   }
 }
 
@@ -214,7 +296,8 @@ if (window.acode) {
       }
       acodePlugin.baseUrl = baseUrl;
       acodePlugin.init($page, cacheFile, cacheFileUrl);
-    }
+    },
+    acodePlugin.settingsList
   );
 
   acode.setPluginUnmount(plugin.id, () => {
