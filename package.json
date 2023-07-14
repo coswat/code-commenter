@@ -1,10 +1,10 @@
 {
-  "name": "acode-plugin",
+  "name": "acode-code-commenter",
   "version": "1.0.2",
-  "description": "Template for Acode plugin",
+  "description": "Code Commenter for Acode plugin",
   "main": "dist/main.js",
-  "repository": "https://github.com/deadlyjack/acode-plugin.git",
-  "author": "Ajit <me@ajitkumar.dev>",
+  "repository": "https://github.com/coswat/acode-code-commenter.git",
+  "author": "Abhishek B | Coderswat",
   "license": "MIT",
   "dependencies": {
     "html-tag-js": "^1.1.22"
