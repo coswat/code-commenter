@@ -280,10 +280,7 @@ class CodeCommenter {
   }
   // check the extension is either html/css or xml
   multiSupport(ext) {
-    if (ext == "html" || ext == "css" || ext == "xml") {
-      return true;
-    }
-    return false;
+    return ext == "html" || ext == "css" || ext == "xml";
   }
 }
 
