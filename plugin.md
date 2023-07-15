@@ -11,7 +11,16 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
             <li>Updated readme</li>
         </ul>
     </details><br>
-
+<details>
+        <summary>
+            <code><strong>v1.0.2</strong></code>
+        </summary>
+        <ul> <br>
+            <li>Added plugin settings option</li>
+            <li>Updated readme</li>
+        </ul>
+    </details><br>
+    
 ## installation 
 
 - Install **Code Commenter** Plugin from `Acode App > Settings > Plugins > And search here for Code Commenter` and install it
