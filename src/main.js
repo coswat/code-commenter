@@ -5,16 +5,23 @@ const appSettings = acode.require("settings");
 // Supported languages
 const supportedLang = [
   "c", // C
+  "cc", // C++
   "cljs", // Clojure
   "cpp", // C++
   "cs", // C#
   "css", // Css
+  "cxx", // C++
   "dart", // Dart
   "ejs", // Embeded Javascript
   "go", // Golang
+  "h", // C header
   "haml", // Haml
+  "hpp", // C++ header
   "html", // Html
   "hs", // Haskel
+  "hxx", // C++ header
+  "inl", // C++ inline
+  "ipp", // C++ implementation
   "java", // Java
   "js", // Javascript
   "json", // Json
@@ -62,16 +69,23 @@ const supportedFiles = [
 // Comment syntax for single-line comments
 const cmtSyntax = {
   c: "// ",
+  cc: "// ",
   cljs: "// ",
   cpp: "// ",
   cs: "// ",
+  cxx: "// ",
   dart: "// ",
   ejs: "// ",
   env: "# ",
   gitignore: "# ",
   go: "// ",
+  h: "// ",
   haml: "# ",
+  hpp: "// ",
+  hxx: "// ",
   hs: "-- ",
+  inl: "// ",
+  ipp: "// ",
   java: "// ",
   js: "// ",
   json: "// ",
