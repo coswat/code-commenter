@@ -114,7 +114,16 @@ const cmtSyntax = {
 
 // Comment syntax for double-line comments
 const cmtSyntaxDouble = {
+  c: { first: "/* ", last: " */" },
+  cc: { first: "/* ", last: " */" },
+  cpp: { first: "/* ", last: " */" },
+  cxx: { first: "/* ", last: " */" },
+  h: { first: "/* ", last: " */" },
   html: { first: "<!-- ", last: " -->" },
+  hpp: { first: "/* ", last: " */" },
+  hxx: { first: "/* ", last: " */" },
+  inl: { first: "/* ", last: " */" },
+  ipp: { first: "/* ", last: " */" },
   twig: { first: "{# ", last: " #}" },
   blade: { first: "{{-- ", last: " --}}" },
   hbs: { first: "{{!-- ", last: " --}}" },
@@ -122,6 +131,7 @@ const cmtSyntaxDouble = {
   mako: { first: "<%# ", last: " %>" },
   mst: { first: "<!-- ", last: " -->" },
   mustache: { first: "<!-- ", last: " -->" },
+  py: { first: "''' ", last: " '''" },
   tpl: { first: "{* ", last: " *}" },
   xml: { first: "<!-- ", last: " -->" },
   liquid: { first: "{# ", last: " #}" },
