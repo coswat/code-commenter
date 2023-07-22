@@ -31,7 +31,7 @@ type CommentTypes = CommentSyntax | DoubleLineCommentSyntax;
 type DoubleOrString = string | DoubleLineCommentSyntax;
 
 // Supported languages
-const supportedLang = [
+const supportedLang: string[] = [
   "c", // C
   "cc", // C++
   "cljs", // Clojure
@@ -71,7 +71,7 @@ const supportedLang = [
 ];
 
 // Supported templating engines
-const supportedTempl = [
+const supportedTempl: string[] = [
   "blade", // Laravel Blade (blade.php)
   "hbs", // HandleBars
   "liquid", // Liquid
@@ -85,7 +85,7 @@ const supportedTempl = [
 ];
 
 // Supported Files
-const supportedFiles = [
+const supportedFiles: string[] = [
   "env",
   "gitignore",
   "Makefile", // Makefile
