@@ -40,7 +40,7 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
     </details>    
 <details>
         <summary>
-            <code><strong>v1.0.3</strong></code>
+            <code><strong>v1.0.5</strong></code>
         </summary>
         <ul>
         Bug fix && Perfommence boost

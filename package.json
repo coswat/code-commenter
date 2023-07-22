@@ -1,6 +1,6 @@
 {
   "name": "acode-code-commenter",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Code Commenter for Acode plugin",
   "main": "dist/main.js",
   "repository": "https://github.com/coswat/acode-code-commenter.git",
