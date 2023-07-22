@@ -28,6 +28,22 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
          <a href="https://github.com/coswat/acode-code-commenter/pull/4">Merged pr</a>
         </ul>
     </details><br>
+<details>
+        <summary>
+            <code><strong>v1.0.4</strong></code>
+        </summary>
+        <ul> <br>
+         Readme update
+        </ul>
+    </details><br>
+<details>
+        <summary>
+            <code><strong>v1.0.5</strong></code>
+        </summary>
+        <ul> <br>
+         Bug fix && Perfommence boost
+        </ul>
+    </details><br>
     
 ## installation 
 
