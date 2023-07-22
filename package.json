@@ -7,6 +7,7 @@
   "author": "Abhishek B | Coderswat",
   "license": "MIT",
   "dependencies": {
+    "global": "^4.4.0",
     "html-tag-js": "^1.1.22"
   },
   "devDependencies": {
@@ -17,17 +18,18 @@
     "babel-loader": "^9.1.0",
     "jszip": "^3.10.1",
     "live-server": "^1.2.2",
+    "ip": "^1.1.8",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.0.0"
   },
   "scripts": {
     "build": "webpack",
     "build-release": "webpack --mode production",
-    "start-dev": "node .vscode/start-dev"
+    "start-dev": "node .devServer/start-dev"
   },
-  "browserslist": [
-    "> 0.25%, not dead"
-  ],
+  "browserslist": ["> 0.25%, not dead"],
   "resolutions": {
     "terser": ">=5.14.2 ",
     "glob-parent": ">=5.1.2"

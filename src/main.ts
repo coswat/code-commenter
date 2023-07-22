@@ -1,6 +1,22 @@
 import plugin from "../plugin.json";
 const selectionMenu = acode.require("selectionMenu");
 const appSettings = acode.require("settings");
+const toast = acode.require("toast");
+
+// Interface for Comment Syntax ( Single )
+interface CommentSyntax {
+  [key: string]: string;
+}
+
+// Interface for Comment Syntax ( Double )
+interface DoubleLineCommentSyntax {
+  first: string;
+  last: string;
+}
+
+type CommentTypes = CommentSyntax | DoubleLineCommentSyntax;
+
+type DoubleOrString = string | DoubleLineCommentSyntax;
 
 // Supported languages
 const supportedLang = [
@@ -67,7 +83,7 @@ const supportedFiles = [
   "yaml", // Yaml
 ];
 // Comment syntax for single-line comments
-const cmtSyntax = {
+const cmtSyntax: CommentSyntax = {
   c: "// ",
   cc: "// ",
   cljs: "// ",
@@ -113,7 +129,9 @@ const cmtSyntax = {
 };
 
 // Comment syntax for double-line comments
-const cmtSyntaxDouble = {
+const cmtSyntaxDouble: {
+  [key: string]: DoubleLineCommentSyntax;
+} = {
   html: { first: "<!-- ", last: " -->" },
   twig: { first: "{# ", last: " #}" },
   blade: { first: "{{-- ", last: " --}}" },
@@ -129,14 +147,15 @@ const cmtSyntaxDouble = {
 
 class CodeCommenter {
   // multi comment for html ,css, xml is true ( enabled by default )
-  multiComment = true;
+  public multiComment: boolean = true;
   // file mode for files like .env and .gitignore ( enabled by default )
-  files = true;
+  public files: boolean = true;
   // templating engine mode (enabled by default)
-  templatingEngine = true;
+  public templatingEngine: boolean = true;
   // Available extensions
-  extensions = [];
-
+  private extensions: string[] = [];
+  // Base Url
+  public baseUrl: string | undefined;
   // register the settings
   constructor() {
     if (!appSettings.value[plugin.id]) {
@@ -148,12 +167,12 @@ class CodeCommenter {
       appSettings.update(false);
     }
   }
-  async init() {
+  public async init(): Promise<void> {
     // Add the comment action to the selection menu
     selectionMenu.add(this.action.bind(this), "//", "all");
   }
   // Plugin Action
-  async action() {
+  public async action() {
     const { editor, activeFile } = editorManager;
     this.loadExtensions();
     // extension name
@@ -161,7 +180,7 @@ class CodeCommenter {
 
     if (this.extNotSupported(extname)) {
       // Show a toast message if the file extension is not supported
-      window.toast("file not supported", 3000);
+      toast("file not supported", 3000);
       return;
     }
 
@@ -169,32 +188,32 @@ class CodeCommenter {
     // selected text by user
     let selectedText = editor.getSelectedText();
     // get the syntax for the file extension
-    let cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
+    let cmt: DoubleOrString = cmtSyntax[extname] || cmtSyntaxDouble[extname];
 
     //if the extension is html or css we do multi line comment instead of single line
     if (this.settings.multiComment && this.multiSupport(extname)) {
       if (selectedText.startsWith(cmt["first"], 0)) {
-        let modifiedText = selectedText.replace(cmt["first"], "");
+        let modifiedText: string = selectedText.replace(cmt["first"], "");
         modifiedText = modifiedText.replace(cmt["last"], "");
         // Replace the selected text with the commented text
         editor.getSession().replace(selectionRange, modifiedText);
         // Reset extension
         this.extensions = [];
         // Show a success toast message
-        window.toast("Success", 2000);
+        toast("Success", 2000);
         return;
       }
-      let modifiedText = cmt["first"] + selectedText + cmt["last"];
+      let modifiedText: string = cmt["first"] + selectedText + cmt["last"];
       // Replace the selected text with the commented text
       editor.getSession().replace(selectionRange, modifiedText);
       // Reset extension
       this.extensions = [];
       // Show a success toast message
-      window.toast("Success", 2000);
+      toast("Success", 2000);
       return;
     }
-    let lines = selectedText.split("\n");
-    let modifiedText = lines.map((line) => {
+    let lines: string[] = selectedText.split("\n");
+    let modifiedText: string[] = lines.map((line) => {
       if (typeof cmt === "object") {
         return this.doubleCommentParser(cmt, line);
       } else {
@@ -208,11 +227,11 @@ class CodeCommenter {
     // Reset the extensions
     this.extensions = [];
     // Show a success toast message
-    window.toast("Success", 2000);
+    toast("Success", 2000);
   }
 
   // Get the file extension from the filename
-  getExt(filename) {
+  private getExt(filename: string): string {
     const parts = filename.split(".");
     if (parts.length >= 2) {
       const extension = parts.pop();
@@ -225,12 +244,12 @@ class CodeCommenter {
   }
 
   // Check if the file extension is not supported
-  extNotSupported(ext) {
+  private extNotSupported(ext: string): boolean {
     return !this.extensions.includes(ext);
   }
 
   // Parse double-line comments
-  doubleCommentParser(cmt, line) {
+  private doubleCommentParser(cmt: CommentTypes, line: string): string {
     if (line.startsWith(cmt["first"], 0)) {
       let parsed = line.replace(cmt["first"], "");
       return parsed.replace(cmt["last"], "");
@@ -239,14 +258,14 @@ class CodeCommenter {
   }
 
   // Parse single-line comments
-  singleCommentParser(cmt, line) {
+  private singleCommentParser(cmt: string, line: string): string {
     if (line.startsWith(cmt, 0)) {
       return line.replace(cmt, "");
     }
     return cmt + line;
   }
   // get settings list
-  get settingsList() {
+  public get settingsList() {
     return {
       list: [
         {
@@ -268,22 +287,22 @@ class CodeCommenter {
           checkbox: this.settings.templEngineMode,
         },
       ],
-      cb: (key, value) => {
+      cb: (key: string, value: boolean) => {
         this.settings[key] = value;
         appSettings.update(true);
       },
     };
   }
   // get plugin settings value from settings.json
-  get settings() {
+  public get settings() {
     return appSettings.value[plugin.id];
   }
 
-  async destroy() {
+  public async destroy(): Promise<void> {
     // Clean up or perform any necessary actions when the plugin is destroyed
   }
   // load supported extesions from users settings
-  loadExtensions() {
+  private loadExtensions(): void {
     this.extensions.push(...supportedLang);
     if (this.settings.fileMode) {
       this.extensions.push(...supportedFiles);
@@ -293,7 +312,7 @@ class CodeCommenter {
     }
   }
   // check the extension is either html/css or xml
-  multiSupport(ext) {
+  private multiSupport(ext: string): boolean {
     return ext == "html" || ext == "css" || ext == "xml";
   }
 }
@@ -303,12 +322,16 @@ if (window.acode) {
 
   acode.setPluginInit(
     plugin.id,
-    (baseUrl, $page, { cacheFileUrl, cacheFile }) => {
+    async (
+      baseUrl: string,
+      $page: WCPage,
+      { cacheFileUrl, cacheFile }: any
+    ) => {
       if (!baseUrl.endsWith("/")) {
         baseUrl += "/";
       }
       acodePlugin.baseUrl = baseUrl;
-      acodePlugin.init($page, cacheFile, cacheFileUrl);
+      await acodePlugin.init();
     },
     acodePlugin.settingsList
   );
