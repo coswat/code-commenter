@@ -181,14 +181,14 @@ class CodeCommenter {
   }
   public async init(): Promise<void> {
     // Add the comment action to the selection menu
-    selectionMenu.add(this.action.bind(this), "//", "all");
+    selectionMenu.add(this.action.bind(this), "//", "selected");
   }
   // Plugin Action
-  public async action() {
+  public async action(): Promise<void> {
     const { editor, activeFile } = editorManager;
-    this.loadExtensions();
+    await this.loadExtensions();
     // extension name
-    let extname = this.getExt(activeFile.name);
+    let extname: string = await this.getExt(activeFile.name);
 
     if (this.extNotSupported(extname)) {
       // Show a toast message if the file extension is not supported
@@ -232,7 +232,7 @@ class CodeCommenter {
         return this.singleCommentParser(cmt, line);
       }
     });
-    let newText = modifiedText.join("\n");
+    let newText: string = modifiedText.join("\n");
 
     // Replace the selected text with the commented text
     editor.getSession().replace(selectionRange, newText);
@@ -243,7 +243,7 @@ class CodeCommenter {
   }
 
   // Get the file extension from the filename
-  private getExt(filename: string): string {
+  private async getExt(filename: string): Promise<string> {
     const parts = filename.split(".");
     if (parts.length >= 2) {
       const extension = parts.pop();
@@ -314,7 +314,7 @@ class CodeCommenter {
     // Clean up or perform any necessary actions when the plugin is destroyed
   }
   // load supported extesions from users settings
-  private loadExtensions(): void {
+  private async loadExtensions(): Promise<void> {
     this.extensions.push(...supportedLang);
     if (this.settings.fileMode) {
       this.extensions.push(...supportedFiles);
