@@ -13,6 +13,18 @@ interface DoubleLineCommentSyntax {
   first: string;
   last: string;
 }
+// Interface for Settings Item
+interface SettingItem {
+  key: string;
+  text: string;
+  checkbox: boolean;
+  info: string;
+}
+// Interface for Settings List
+interface SettingsList {
+  list: SettingItem[];
+  cb: (key: string, value: boolean) => void;
+}
 
 type CommentTypes = CommentSyntax | DoubleLineCommentSyntax;
 
@@ -265,7 +277,7 @@ class CodeCommenter {
     return cmt + line;
   }
   // get settings list
-  public get settingsList() {
+  public get settingsList(): SettingsList {
     return {
       list: [
         {
