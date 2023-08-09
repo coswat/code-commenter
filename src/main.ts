@@ -62,6 +62,8 @@ const supportedLang: string[] = [
     "py", // Python
     "rb", // Ruby
     "rs", // Rust
+    "sass", // SASS
+    "scss", // SCSS
     "sh", // Shell
     "swift", // Swift
     "sql", // SQL
@@ -152,6 +154,8 @@ const cmtSyntaxDouble: {
     mako: { first: "<%# ", last: " %>" },
     mst: { first: "<!-- ", last: " -->" },
     mustache: { first: "<!-- ", last: " -->" },
+    sass: { first: "/* ", last: " */" },
+    scss: { first: "/* ", last: " */" },
     tpl: { first: "{* ", last: " *}" },
     xml: { first: "<!-- ", last: " -->" },
     liquid: { first: "{# ", last: " #}" },

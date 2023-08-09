@@ -46,6 +46,14 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
         Bug fix && Perfommence boost
         </ul>
     </details>
+<details>
+        <summary>
+            <code><strong>v1.0.7</strong></code>
+        </summary>
+        <ul>
+         Added support for `.sass` and `.scss`
+        </ul>
+    </details>
     
 ## installation 
 
