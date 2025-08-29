@@ -143,7 +143,7 @@ const cmtSyntax: CommentSyntax = {
     yaml: "# ",
 };
 
-// Comment syntax for double-line comments
+// Comment syntax for double-line comments ( these files/languages only supports multi comments )
 const cmtSyntaxDouble: {
     [key: string]: DoubleLineCommentSyntax;
 } = {
@@ -161,6 +161,40 @@ const cmtSyntaxDouble: {
     tpl: { first: "{* ", last: " *}" },
     xml: { first: "<!-- ", last: " -->" },
     liquid: { first: "{# ", last: " #}" },
+};
+
+// Languages which supported multi syntax and single ( this particular var is for the double one btw )
+const multiBoxComment: { 
+  [key: string]: DoubleLineCommentSyntax;
+} = {
+  c: { first: "/* ", last: " */" },
+  cc: { first: "/* ", last: " */" },
+  cpp: { first: "/* ", last: " */" },
+  cs: { first: "/* ", last: " */" },
+  cxx: { first: "/* ", last: " */" },
+  dart: { first: "/* ", last: " */" },
+  go: { first: "/* ", last: " */" },
+  h: { first: "/* ", last: " */" },
+  hpp: { first: "/* ", last: " */" },
+  hxx: { first: "/* ", last: " */" },
+  inl: { first: "/* ", last: " */" },
+  ipp: { first: "/* ", last: " */" },
+  java: { first: "/* ", last: " */" },
+  js: { first: "/* ", last: " */" },
+  jsx: { first: "/* ", last: " */" },
+  kt: { first: "/* ", last: " */" },
+  mjs: { first: "/* ", last: " */" },
+  php: { first: "/* ", last: " */" },
+  rs: { first: "/* ", last: " */" },
+  swift: { first: "/* ", last: " */" },
+  ts: { first: "/* ", last: " */" },
+  tsx: { first: "/* ", last: " */" },
+  sql: { first: "/* ", last: " */" },
+  sqlite: { first: "/* ", last: " */" },
+  hs: { first: "{- ", last: " -}" },  
+  lua: { first: "--[[ ", last: " ]]" },
+  rb: { first: "=begin ", last: " =end" },
+  pl: { first: "=begin ", last: " =cut" },
 };
 
 class CodeCommenter {
@@ -205,13 +239,20 @@ class CodeCommenter {
         let selectionRange = editor.getSelectionRange();
         // selected text by user
         let selectedText = editor.getSelectedText();
-        // get the syntax for the file extension
-        let cmt: DoubleOrString =
-            cmtSyntax[extname] || cmtSyntaxDouble[extname];
+        // get the lines length 
+        let line_len = selectedText.split(/\r?\n/).length;
+        // get the comment syntax for the file extension
+        let cmt: DoubleOrString;
+        if ( line_len >= 5 ) {
+          cmt =
+            multiBoxComment[extname] || cmtSyntaxDouble[extname];
+        } else { 
+           cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
+        }
 
         //if the extension is html or css we do multi line comment instead of single line
-        if (this.settings.multiComment && this.multiSupport(extname)) {
-            if (selectedText.startsWith(cmt["first"], 0)) {
+        if (this.settings.multiComment && this.multiSupport(extname, line_len)) {
+            if (selectedText.trimStart().startsWith(cmt["first"])) {
                 let modifiedText: string = selectedText.replace(
                     cmt["first"],
                     ""
@@ -273,7 +314,7 @@ class CodeCommenter {
 
     // Parse double-line comments
     private doubleCommentParser(cmt: CommentTypes, line: string): string {
-        if (line.startsWith(cmt["first"], 0)) {
+        if (line.trimStart().startsWith(cmt["first"])) {
             let parsed = line.replace(cmt["first"], "");
             return parsed.replace(cmt["last"], "");
         }
@@ -282,7 +323,7 @@ class CodeCommenter {
 
     // Parse single-line comments
     private singleCommentParser(cmt: string, line: string): string {
-        if (line.startsWith(cmt, 0)) {
+        if (line.trimStart().startsWith(cmt)) {
             return line.replace(cmt, "");
         }
         return cmt + line;
@@ -334,9 +375,13 @@ class CodeCommenter {
             this.extensions.push(...supportedTempl);
         }
     }
-    // check the extension is either html/css or xml
-    private multiSupport(ext: string): boolean {
-        return ext == "html" || ext == "css" || ext == "xml";
+    // check the extension supports multi comments
+    private multiSupport(ext: string, line_len: number): boolean {
+      if ( line_len >= 5) {
+        return !!(multiBoxComment[ext] || cmtSyntaxDouble[ext]);
+      } else {
+        return !!(cmtSyntaxDouble[ext]);
+      }
     }
 }
 

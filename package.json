@@ -16,9 +16,9 @@
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.18.10",
     "babel-loader": "^9.1.0",
-    "jszip": "^3.10.1",
-    "live-server": "^1.2.2",
     "ip": "^1.1.9",
+    "jszip": "^3.10.1",
+    "live-server": "^1.2.0",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.76.0",
@@ -29,7 +29,9 @@
     "build-release": "webpack --mode production",
     "start-dev": "node .vscode/start-dev"
   },
-  "browserslist": ["> 0.25%, not dead"],
+  "browserslist": [
+    "> 0.25%, not dead"
+  ],
   "resolutions": {
     "terser": ">=5.14.2 ",
     "glob-parent": ">=5.1.2"

@@ -2,10 +2,12 @@
   "id": "coswat.code.commenter",
   "name": "Code Commenter",
   "main": "dist/main.js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "readme": "plugin.md",
   "icon": "icon.png",
+  "keywords": ["commenter"],
   "files": [],
+  "changelogs": "changelog.md",
   "minVersionCode": 292,
   "author": {
     "name": "coderswat",
