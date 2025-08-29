@@ -9,3 +9,5 @@
 - Fixed whitespace issue, no more comment repetitions while selecting/including whitespace.
 
 ---
+
+[Click to watch example video](https://github.com/user-attachments/assets/f2c6e640-b00d-4b80-9767-9ea22cc45233)
