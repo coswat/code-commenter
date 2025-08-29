@@ -1,4 +1,3 @@
-
 <h1>Code Commenter</h1>
 
 
@@ -52,6 +51,14 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
         </summary>
         <ul>
          Added support for `.sass` and `.scss`
+        </ul>
+    </details>
+<details>
+        <summary>
+            <code><strong>v1.0.8</strong></code>
+        </summary>
+        <ul>
+         Checkout the Changelog section
         </ul>
     </details>
     

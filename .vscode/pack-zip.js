@@ -6,6 +6,7 @@ const iconFile = path.join(__dirname, "../icon.png");
 const pluginJSON = path.join(__dirname, "../plugin.json");
 const distFolder = path.join(__dirname, "../dist");
 let readmeDotMd = path.join(__dirname, "../plugin.md");
+let changelogMd = path.join(__dirname, "../changelog.md");
 
 if (!fs.existsSync(readmeDotMd)) {
   readmeDotMd = path.join(__dirname, "../plugin.md");
@@ -18,6 +19,7 @@ const zip = new jszip();
 zip.file("icon.png", fs.readFileSync(iconFile));
 zip.file("plugin.json", fs.readFileSync(pluginJSON));
 zip.file("readme.md", fs.readFileSync(readmeDotMd));
+zip.file("changelog.md", fs.readFileSync(changelogMd));
 
 loadFile("", distFolder);
 
