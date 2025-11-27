@@ -1,6 +1,7 @@
 import plugin from "../plugin.json";
 const selectionMenu = acode.require("selectionMenu");
 const appSettings = acode.require("settings");
+const Confirm = acode.require("confirm");
 const toast = acode.require("toast");
 // Interface for Comment Syntax ( Single )
 interface CommentSyntax {
@@ -51,7 +52,7 @@ const supportedLang: string[] = [
   "ipp", // C++ implementation
   "java", // Java
   "js", // Javascript
-  "json", // Json
+  "jsonc", // JsonC
   "jsx", // Jsx
   "kt", // Kotlin
   "lua", // Lua
@@ -351,7 +352,7 @@ class CodeCommenter {
           key: "fileMode",
           text: "Comment support for files",
           checkbox: this.settings.fileMode,
-          info: "Enable comment support for files, ex: files like .env,.gitignore etc",
+          info: "Enable comment support for files, ex: files like .env, .gitignore etc",
         },
         {
           key: "templEngineMode",
@@ -366,6 +367,11 @@ class CodeCommenter {
       },
     };
   }
+  // Relead the app 
+  private async reload(): Promise<void> {
+    let confirm = await Confirm("NOTE", "Click ok to reload the app");
+    if (confirm) setTimeout(() => location.reload(), 500);
+  }
   // get plugin settings value from settings.json
   public get settings() {
     return appSettings.value[plugin.id];
@@ -373,6 +379,7 @@ class CodeCommenter {
 
   public async destroy(): Promise<void> {
     // Clean up or perform any necessary actions when the plugin is destroyed
+    await this.reload();
   }
   // load supported extesions from users settings
   private async loadExtensions(): Promise<void> {
