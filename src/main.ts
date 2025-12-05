@@ -261,7 +261,7 @@ class CodeCommenter {
       cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
     }
 
-    // if the extension is html or css we do multi line comment instead of single line
+    // If the extension supports multi comments and multi comment is enabled in the settings, we do multi line comment instead of single line
     if (
       this.settings.multiComment &&
       this.multiSupport(extname, line_len, loader)
@@ -317,7 +317,7 @@ class CodeCommenter {
     return "";
   }
 
-  // Check if the file extension is not supported
+  // Check if the file extension is supported or not
   private extNotSupported(ext: string): boolean {
     return !this.extensions.includes(ext);
   }
@@ -367,21 +367,21 @@ class CodeCommenter {
       },
     };
   }
-  // Relead the app 
+  // Reload the app function
   private async reload(): Promise<void> {
     let confirm = await Confirm("NOTE", "Click ok to reload the app");
     if (confirm) setTimeout(() => location.reload(), 500);
   }
-  // get plugin settings value from settings.json
+  // Get the enitire plugin settings value from settings.json
   public get settings() {
     return appSettings.value[plugin.id];
   }
 
   public async destroy(): Promise<void> {
-    // Clean up or perform any necessary actions when the plugin is destroyed
+    // TODO: Clean up or perform any necessary actions when the plugin is destroyed
     await this.reload();
   }
-  // load supported extesions from users settings
+  // Load supported extesions from users settings
   private async loadExtensions(): Promise<void> {
     this.extensions.push(...supportedLang);
     if (this.settings.fileMode) {
@@ -391,7 +391,7 @@ class CodeCommenter {
       this.extensions.push(...supportedTempl);
     }
   }
-  // check the extension supports multi comments
+  // We are checking if the extension supports multi comments or not by fetching from the settings.
   private multiSupport(
     ext: string,
     line_len: number,
