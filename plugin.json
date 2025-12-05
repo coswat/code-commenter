@@ -6,6 +6,7 @@
   "readme": "plugin.md",
   "repository": "https://github.com/coswat/code-commenter",
   "icon": "icon.png",
+  "license": "MIT",
   "keywords": ["commenter"],
   "files": [],
   "changelogs": "changelog.md",
