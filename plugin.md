@@ -4,57 +4,7 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
 
 <details>
         <summary>
-            <code><strong>v1.0.1</strong></code>
-        </summary>
-        <ul> <br>
-            <li>Added support for <code>.ejs</code> and <code>.mjs</code></li>
-            <li>Updated readme</li>
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.2</strong></code>
-        </summary>
-        <ul> <br>
-            <li>Added plugin settings option</li>
-            <li>Updated readme</li>
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.3</strong></code>
-        </summary>
-        <ul> <br>
-         <a href="https://github.com/coswat/code-commenter/pull/4">Merged pr</a>
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.4</strong></code>
-        </summary>
-        <ul> <br>
-         Readme update
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.5</strong></code>
-        </summary>
-        <ul> <br>
-         Bug fix && Perfommence boost
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.7</strong></code>
-        </summary>
-        <ul> <br>
-         Added support for `scss` and `sass`
-        </ul>
-    </details><br>
-<details>
-        <summary>
-            <code><strong>v1.0.8</strong></code>
+            <code><strong>v1.0.9</strong></code>
         </summary>
         <ul> <br>
          Check changelog for details
@@ -113,7 +63,7 @@ Select the code you want to comment/uncomment then click the comment button to m
 
 - .env
 - .gitignore
-- Json
+- Dockerfile
 - Makefile
 - Toml
 - Xml

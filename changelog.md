@@ -1,12 +1,14 @@
 # Changelog
 
-## [1.0.8] - 2025-08-29
+## [1.0.9] - 2025-12-05 
 ### Added
-- Multi-block syntax support for bigger lines.
+- Support for .jsonc and Dockerfile.
+- App reload prompt after plugin deletion.
 
 ### Fixed
 - General bug fixes and stability improvements.
-- Fixed whitespace issue, no more comment repetitions while selecting/including whitespace.
+- Fixed comments not working in Makefile.
+- Removed .json from supported files.
 
 ---
 

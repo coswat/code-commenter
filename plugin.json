@@ -2,7 +2,7 @@
   "id": "coswat.code.commenter",
   "name": "Code Commenter",
   "main": "dist/main.js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "readme": "plugin.md",
   "repository": "https://github.com/coswat/code-commenter",
   "icon": "icon.png",
