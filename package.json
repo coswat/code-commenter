@@ -8,21 +8,21 @@
   "license": "MIT",
   "dependencies": {
     "global": "^4.4.0",
-    "html-tag-js": "^1.1.22"
+    "html-tag-js": "^2.4.16"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.18.13",
-    "@babel/plugin-transform-runtime": "^7.19.6",
-    "@babel/preset-env": "^7.18.10",
-    "babel-loader": "^9.1.0",
-    "ip": "^1.1.9",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-loader": "^10.0.0",
+    "ip": "^2.0.1",
     "jszip": "^3.10.1",
-    "live-server": "^1.2.0",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.1.6",
+    "live-server": "^1.2.2",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
     "webpack": "^5.103.0",
-    "webpack-cli": "^5.0.0"
+    "webpack-cli": "^6.0.1"
   },
   "scripts": {
     "build": "webpack",
