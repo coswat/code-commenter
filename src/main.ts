@@ -90,7 +90,8 @@ const supportedTempl: string[] = [
 
 // Supported Files
 const supportedFiles: string[] = [
-	"env",
+	"Dockerfile",
+	"env", // Environment File
 	"gitignore",
 	"Makefile", // Makefile
 	"toml", // Toml
@@ -108,6 +109,7 @@ const cmtSyntax: CommentSyntax = {
 	cs: "// ",
 	cxx: "// ",
 	dart: "// ",
+	Dockerfile: "# ",
 	ejs: "// ",
 	env: "# ",
 	gitignore: "# ",
@@ -238,7 +240,7 @@ class CodeCommenter {
 
 		if (this.extNotSupported(extname)) {
 			// Show a toast message if the file extension is not supported
-			toast("file not supported", 3000);
+			toast("File type not supported", 3000);
 			return;
 		}
 
@@ -313,6 +315,14 @@ class CodeCommenter {
 
 	// Get the file extension from the filename
 	private async getExt(filename: string): Promise<string> {
+		// We do this if statement becacause some files
+		// does not have a (.) to separate, ex. Makefile Dockerfile etc
+		// We make sure it is also checked with this.
+		if (supportedFiles.includes(filename)) {
+			return filename;
+		}
+
+		// Every other files with (.)
 		const parts = filename.split(".");
 		if (parts.length >= 2) {
 			const extension = parts.pop();
