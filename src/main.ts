@@ -3,6 +3,7 @@ const selectionMenu = acode.require("selectionMenu");
 const appSettings = acode.require("settings");
 const Confirm = acode.require("confirm");
 const toast = acode.require("toast");
+
 // Interface for Comment Syntax ( Single )
 interface CommentSyntax {
 	[key: string]: string;
@@ -97,6 +98,7 @@ const supportedFiles: string[] = [
 	"yml", // Yaml
 	"yaml", // Yaml
 ];
+
 // Comment syntax for single-line comments
 const cmtSyntax: CommentSyntax = {
 	c: "// ",
@@ -208,7 +210,8 @@ class CodeCommenter {
 	private extensions: string[] = [];
 	// Base Url
 	public baseUrl: string | undefined;
-	// register the settings
+
+	// Create the plugin settings with default values.
 	constructor() {
 		if (!appSettings.value[plugin.id]) {
 			appSettings.value[plugin.id] = {
@@ -219,10 +222,13 @@ class CodeCommenter {
 			appSettings.update(false);
 		}
 	}
+
+	// Add the (//) button in the editor
 	public async init(): Promise<void> {
 		// Add the comment action to the selection menu
 		selectionMenu.add(this.action.bind(this), "//", "selected");
 	}
+
 	// Plugin Action
 	public async action(): Promise<void> {
 		const { editor, activeFile } = editorManager;
@@ -261,7 +267,8 @@ class CodeCommenter {
 			cmt = cmtSyntax[extname] || cmtSyntaxDouble[extname];
 		}
 
-		// If the extension supports multi comments and multi comment is enabled in the settings, we do multi line comment instead of single line
+		// If the extension supports multi comments and multi comment is enabled
+		// in the settings, we do multi line comment instead of single line
 		if (
 			this.settings.multiComment &&
 			this.multiSupport(extname, line_len, loader)
@@ -338,6 +345,7 @@ class CodeCommenter {
 		}
 		return cmt + line;
 	}
+
 	// get settings list
 	public get settingsList(): SettingsList {
 		return {
@@ -367,20 +375,27 @@ class CodeCommenter {
 			},
 		};
 	}
+
 	// Reload the app function
 	private async reload(): Promise<void> {
 		let confirm = await Confirm("NOTE", "Click ok to reload the app");
 		if (confirm) setTimeout(() => location.reload(), 500);
 	}
+
 	// Get the enitire plugin settings value from settings.json
 	public get settings() {
 		return appSettings.value[plugin.id];
 	}
 
+	// This function will be called while unininstalling our plugin.
+	// We need to remove or pluggin settings from the app settings.
 	public async destroy(): Promise<void> {
-		// TODO: Clean up or perform any necessary actions when the plugin is destroyed
+		delete appSettings.value[plugin.id];
+		appSettings.update(true);
+		// reloading after deleting the settings.
 		await this.reload();
 	}
+
 	// Load supported extesions from users settings
 	private async loadExtensions(): Promise<void> {
 		this.extensions.push(...supportedLang);
@@ -391,7 +406,9 @@ class CodeCommenter {
 			this.extensions.push(...supportedTempl);
 		}
 	}
-	// We are checking if the extension supports multi comments or not by fetching from the settings.
+
+	// We are checking if the extension supports multi comments
+	// or not by fetching from the settings.
 	private multiSupport(
 		ext: string,
 		line_len: number,
@@ -405,6 +422,7 @@ class CodeCommenter {
 	}
 }
 
+// DEFAULTS: No edits here.
 if (window.acode) {
 	const acodePlugin = new CodeCommenter();
 
