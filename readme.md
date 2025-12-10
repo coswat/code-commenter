@@ -1,14 +1,14 @@
 <h1>Code Commenter</h1>
 
 
-Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines and files
+Code Commenter is a Acode app plugin , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines, files, setting up custom keybindings and more.
 
 <details>
         <summary>
             <code><strong>v1.0.9</strong></code>
         </summary>
         <ul>
-         Checkout the Changelog section
+         Checkout the changelog.md
         </ul>
     </details>
     
@@ -20,7 +20,7 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
 
 ## Example Usage
 
-Select the code you want to comment/uncomment then click the comment button to make it happen
+Select the code you want to comment/uncomment then click the comment button (//) to make it happen. Also you comment using keybindings.
 
 ![Code Comment](https://github.com/coswat/todo/assets/97345827/3d92ca99-12be-472b-96a4-4d62cb420552)
 
@@ -50,7 +50,7 @@ Select the code you want to comment/uncomment then click the comment button to m
 - SQLite
 - TypeScript
 
-## Supported Templating Engines
+## Templating Engines
 
 - Blade
 - HandleBars
@@ -62,7 +62,7 @@ Select the code you want to comment/uncomment then click the comment button to m
 - Twig
 - Velocity 
 
-## Supported Files 
+## Files 
 
 - .env
 - .gitignore

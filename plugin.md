@@ -1,13 +1,13 @@
 # Code Commenter
 
-Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines and files
+This plugin allows you to comment/uncomment multiple lines of code at a time, supports various language's, templating engines, files, setting up custom keybindings and more.
 
 <details>
         <summary>
             <code><strong>v1.0.9</strong></code>
         </summary>
         <ul> <br>
-         Check changelog for details
+         Check changelog section for details
         </ul>
     </details><br>
     
@@ -17,7 +17,7 @@ Code Commenter is plugin for Acode , this plugin allows you to comment/uncomment
 
 ## Example Usage
 
-Select the code you want to comment/uncomment then click the comment button to make it happen
+Select the code you want to comment/uncomment then click the comment button (//) to make it happen. Also you comment using keybindings. The default keybinding is Ctrl+U, you can edit it from the settings page.
 
 ![Code Comment](https://github.com/coswat/todo/assets/97345827/3d92ca99-12be-472b-96a4-4d62cb420552)
 
