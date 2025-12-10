@@ -19,7 +19,7 @@ This plugin allows you to comment/uncomment multiple lines of code at a time, su
 
 Select the code you want to comment/uncomment then click the comment button (//) to make it happen. Also you comment using keybindings. The default keybinding is Ctrl+U, you can edit it from the settings page.
 
-![Code Comment](https://github.com/coswat/todo/assets/97345827/3d92ca99-12be-472b-96a4-4d62cb420552)
+![Code Comment](https://github-production-user-asset-6210df.s3.amazonaws.com/97345827/253048206-3d92ca99-12be-472b-96a4-4d62cb420552.jpg)
 
 ## Supported Languages
 
