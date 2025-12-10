@@ -418,7 +418,7 @@ class CodeCommenter {
 	}
 
 	// We are checking if the extension supports multi comments
-	// or not by fetching from the settings.
+	// or not by fetching from the array.
 	private multiSupport(
 		ext: string,
 		line_len: number,
