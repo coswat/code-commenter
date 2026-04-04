@@ -246,7 +246,7 @@ class CodeCommenter {
 
 		let selectionRange = editor.getSelectionRange();
 		// selected text by user
-		let selectedText = editor.getSelectedText();
+		let selectedText = editor.getCopyText();
 		// get the lines length
 		let line_len = selectedText.split(/\r?\n/).length;
 		// get the comment syntax for the file extension
@@ -279,7 +279,7 @@ class CodeCommenter {
 				let modifiedText: string = selectedText.replace(cmt["first"], "");
 				modifiedText = modifiedText.replace(cmt["last"], "");
 				// Replace the selected text with the commented text
-				editor.getSession().replace(selectionRange, modifiedText);
+				editor.session.replace(selectionRange, modifiedText);
 				// Reset extension
 				this.extensions = [];
 				// Show a success toast message
@@ -288,7 +288,7 @@ class CodeCommenter {
 			}
 			let modifiedText: string = cmt["first"] + selectedText + cmt["last"];
 			// Replace the selected text with the commented text
-			editor.getSession().replace(selectionRange, modifiedText);
+			editor.session.replace(selectionRange, modifiedText);
 			// Reset extension
 			this.extensions = [];
 			// Show a success toast message
@@ -306,7 +306,7 @@ class CodeCommenter {
 		let newText: string = modifiedText.join("\n");
 
 		// Replace the selected text with the commented text
-		editor.getSession().replace(selectionRange, newText);
+		editor.session.replace(selectionRange, newText);
 		// Reset the extensions
 		this.extensions = [];
 		// Show a success toast message
