@@ -4,7 +4,7 @@ This plugin allows you to comment/uncomment multiple lines of code at a time, su
 
 <details>
         <summary>
-            <code><strong>v1.0.9</strong></code>
+            <code><strong>v2.0.0</strong></code>
         </summary>
         <ul> <br>
          Check changelog section for details

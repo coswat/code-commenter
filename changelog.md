@@ -1,15 +1,11 @@
 # Changelog
 
-## [1.0.9] - 2025-12-05 
+## [2.0.0] - 2026-10-15
 ### Added
-- Support for .jsonc and Dockerfile.
-- App reload prompt after plugin deletion.
+- Codemirror suppport
 
 ### Fixed
-- General bug fixes and stability improvements.
-- Fixed comments not working in Makefile.
-- Removed .json from supported files.
+- Not working on new app
+- No other major fixes
 
 ---
-
-[Click to watch example video](https://github.com/user-attachments/assets/f2c6e640-b00d-4b80-9767-9ea22cc45233)
